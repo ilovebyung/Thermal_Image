@@ -1,8 +1,8 @@
-import numpy as np
 import cv2
-import datetime
+import time
 
-cap = cv2.VideoCapture(1)
+# first viceo device is 0
+cap = cv2.VideoCapture(0)
 
 while (True):
     ret, frame = cap.read()
@@ -13,10 +13,8 @@ while (True):
     # When 's' is pressed, save and quit
     if cv2.waitKey(1) & 0xFF == ord('s'):
         # formatting date objects into file_name
-        now = datetime.datetime.now()
-        YYYYMMDDHHMM = now.strftime('%Y') + now.strftime('%m') + \
-            now.strftime('%d') + now.strftime('%H') + now.strftime('%M')
-        file_name = str(YYYYMMDDHHMM) + '.png'
+        now = time.strftime("%Y_%m_%d-%H_%M_%S")
+        file_name = now + '.png'
         # write to a file
         cv2.imwrite(file_name, frame)
         break
